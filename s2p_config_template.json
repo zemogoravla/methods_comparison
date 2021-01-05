@@ -1,0 +1,92 @@
+{
+  "out_dir": "./output_jax_068_pair_001_002",
+  "images": [
+    {
+      "clr": null,
+      "img": "/home/agomez/ownCloud/Documents/doctorado/MultiViewStereo/data/JAX/JAX_068_001_PAN.tif",
+      "wat": null,
+      "roi": null,
+      "cld": null
+    },
+    {
+      "img": "/home/agomez/ownCloud/Documents/doctorado/MultiViewStereo/data/JAX/JAX_068_002_PAN.tif"
+    }
+  ],
+
+  "utm_zone": "17N",
+  "utm_bbx": [
+    436014.991904659,
+    436398.9919772741,
+    3357431.999845903,
+    3357815.999846706
+  ],
+  "ll_bbx": [
+    -81.66576162426408,
+    -81.66174302583765,
+    30.34706679439355,
+    30.350552109986083
+  ],
+  "roi": {
+    "y": 20014,
+    "x": 15798,
+    "w": 1899,
+    "h": 1975
+  },
+  "full_img": true,
+  "tile_size": 500,
+  "dsm_resolution": 0.5,
+  "dsm_radius": 0,
+  "msk_erosion": 0,
+  
+  "debug": false,
+  "clean_intermediate": false,
+
+  "matching_algorithm": "mgm_multi",
+  "rpc_alt_range_scale_factor": 1,
+  "triangulation_mode": "pairwise",
+  "max_pointing_error": 10,
+  "vertical_margin": 5,
+  "skip_existing": false,
+  "use_global_pointing_for_geometric_triangulation": false,
+  "n_gcp_per_axis": 5,
+  "max_processes": null,
+  "temporary_dir": "/tmp",
+  "horizontal_margin": 20,
+  "cargarse_basura": true,
+
+  "disp_max": null,
+  "stereo_regularity_multiplier": 1.0,
+  "disp_range_exogenous_high_margin": 100,
+  "fusion_thresh": 3,
+  "disp_range_srtm_high_margin": 50,
+  "clean_tmp": true,
+  "alt_min": null,
+  
+  "register_with_shear": true,
+  "alt_max": null,
+  "sift_match_thresh": 0.6,
+  
+  "exogenous_dem_geoid_mode": true,
+  "stereo_speckle_filter": 25,
+  "disp_min": null,
+  "disp_range_exogenous_low_margin": -10,
+  "disp_range_srtm_low_margin": -20,
+  "disable_srtm": true,
+
+  "fusion_operator": "average_if_close",
+  "dsm_sigma": null,
+  
+  "census_ncc_win": 5,
+  
+  "omp_num_threads": 1,
+
+  "disp_range_extra_margin": 0.2,
+  
+  "subsampling_factor": 1,
+  
+  "relative_sift_match_thresh": true,
+  "epipolar_thresh": 0.5,
+  "exogenous_dem": null,
+  
+  "disp_range_method": "sift"
+}
