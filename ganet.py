@@ -20,9 +20,6 @@ from torch.utils.data import DataLoader
 
 from tqdm import tqdm
 
-sys.path.append('/home/agomez/Documents/iie/cursos_posgrado/Imagenes_Satelitales_2019/deep/GANet')
-#sys.path.append('/home/agomez/Documents/iie/cursos_posgrado/Imagenes_Satelitales_2019/practico/Project_Patchmatch_DR')
-sys.path.append('/home/agomez/ownCloud/Documents/doctorado/MultiViewStereo/python/lib')
 
 from models.GANet_deep import GANet
 

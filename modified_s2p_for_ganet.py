@@ -733,10 +733,20 @@ def compute_disparity_map(im1, im2, disp, mask, algo, disp_min=None,
         create_rejection_mask(disp, im1, im2, mask)
 
     if algo == 'ganet':
-        import ganet
+        import test_ganet
+
 
         #ganet.test_ganet(im1, im2, disp, do_mismatch_filtering=True, stereo_speckle_filter=cfg['stereo_speckle_filter'])
-        ganet.test_ganet(im1, im2, disp, do_mismatch_filtering=True, stereo_speckle_filter=50)
+        #ganet.test_ganet(im1, im2, disp, do_mismatch_filtering=True, stereo_speckle_filter=50)
+
+        test_ganet.main(['--ref', im1, '--sec', im2, '--disp', disp,
+                         '--pretrained', os.getenv('GANET_PRETRAINED_MODEL', '') ,
+                         '--do_mismatch_filtering',
+                         '--stereo_speckle_filter', str(cfg['stereo_speckle_filter']),
+                         '--crop_height', os.getenv('GANET_CROP_HEIGHT', str(48*14)),
+                         '--crop_width', os.getenv('GANET_CROP_WIDTH', str(48 * 14)),
+                         '--max_disp', os.getenv('GANET_MAX_DISP', str(192)) ])
+
 
         create_rejection_mask(disp, im1, im2, mask)
 
