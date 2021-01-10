@@ -29,9 +29,18 @@ if __name__ == '__main__':
     parser.add_argument('--clean_intermediate', action='store_true', help='Clean intermediate files')
     parser.add_argument('--dsm_radius', type=int, default=0, help='DSM radius')
 
+    parser.add_argument('--disp_range_method', type=str, default='sift', help='Method to estimate de disparity range [(sift), fixed_altitude_range]')
+
 
     # parse arguments and check
     args = parser.parse_args()
+
+    # if args.out_dir is a relative path, build the abs path with the directory of the config
+    if os.path.isabs(args.out_dir):
+        out_dir = args.out_dir
+    else:
+        out_dir = os.path.join(os.path.dirname(args.config_filename), args.out_dir)
+
 
     angles = get_angles(args.ref_image_filename, args.sec_image_filename)
     print(angles)
@@ -39,11 +48,11 @@ if __name__ == '__main__':
     if os.path.exists(args.config_filename) and not args.overwrite_config:
         raise ValueError('Config filename exists!,  config_filename:"{}"'.format(args.config_filename))
 
-    if os.path.isfile(args.out_dir)  :
-        raise ValueError('Out directory name is currently a file!,  out_dir:"{}"'.format(args.out_dir))
+    if os.path.isfile(out_dir)  :
+        raise ValueError('Out directory name is currently a file!,  out_dir:"{}"'.format(out_dir))
 
-    if os.path.isdir(args.out_dir) and not args.allow_existent_out_dir:
-        raise ValueError('Out directory exists!,  out_dir:"{}"'.format(args.out_dir))
+    if os.path.isdir(out_dir) and not args.allow_existent_out_dir:
+        raise ValueError('Out directory exists!,  out_dir:"{}"'.format(out_dir))
 
 
     # load the config template
@@ -70,6 +79,13 @@ if __name__ == '__main__':
     config_dict['utm_zone'] = '{}{}'.format(zone_number, zone_hemisphere)
 
     config_dict['angles'] = angles
+
+    if args.disp_range_method == "fixed_altitude_range":
+        config_dict["disp_range_method"] = "fixed_altitude_range"
+        config_dict["alt_min"] = min_height - 5
+        config_dict["alt_max"] = max_height + 5
+
+
 
     # save the config
     with open(args.config_filename, 'w') as fp:
