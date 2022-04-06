@@ -19,11 +19,11 @@ DATA_BASE_DIRECTORY = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA_CLUSTER'
 # para el cluster
 #DATA_BASE_DIRECTORY = '/clusteruy/home/agomez/DATA'
 
-CONFIGURATIONS = ['MVS_NIT', 'JAX_NIT', 'OMA_NIT', 'JAX_FIT', 'OMA_FIT']
-CURRENT_CONFIGURATION = 'MVS_NIT'
+CONFIGURATIONS = ['MVS_NIT', 'JAX_NIT', 'OMA_NIT', 'JAX_FIT', 'OMA_FIT', 'MVS_ALL', 'JAX_ALL']
+CURRENT_CONFIGURATION = 'JAX_ALL'
 
 configure_s2p = True
-configure_s2p_ganet = True
+configure_s2p_ganet = False
 configure_vissat_colmap = False
 configure_vissat_planesweep = False
 
@@ -88,8 +88,23 @@ if CURRENT_CONFIGURATION == 'OMA_FIT':
     gt_filename_template = os.path.join(DATA_BASE_DIRECTORY,'{0}_DATA/gt/{0}_{1:03d}_DSM.tif')
     output_dir_template = os.path.join(DATA_BASE_DIRECTORY, 'COMPARISON_{}_FIT')
 
+if CURRENT_CONFIGURATION=='MVS_ALL':
+    # MVS3D
+    dsm_resolution = 0.3 #MVS3D
+    image_sets = ['crop_01', 'crop_02', 'crop_03', 'crop_04', 'crop_05']
+    prefix = 'MVS'
+    image_set_dir_template = os.path.join(DATA_BASE_DIRECTORY, '{0}_DATA/cropped_all/mvs3d_gt_{1}')
+    gt_filename_template = os.path.join(DATA_BASE_DIRECTORY,'{0}_DATA/gt/mvs3d_gt_{1}.tif')
+    output_dir_template = os.path.join(DATA_BASE_DIRECTORY,'COMPARISON_{}_ALL')
 
-
+if CURRENT_CONFIGURATION=='JAX_ALL':
+    #JAX NEAR IN TIME
+    dsm_resolution = 0.5 #JAX, OMAHA
+    image_sets = [156, 165, 214, 251, 264]
+    prefix = 'JAX'
+    image_set_dir_template = os.path.join(DATA_BASE_DIRECTORY,'{0}_DATA/cropped_all/{0}_{1:03d}')
+    gt_filename_template = os.path.join(DATA_BASE_DIRECTORY,'{0}_DATA/gt/{0}_{1:03d}_DSM.tif')
+    output_dir_template = os.path.join(DATA_BASE_DIRECTORY,'COMPARISON_{}_ALL')
 
 #-------------------------------------------------------------------------------------------------------------
 for image_set in image_sets:
@@ -248,7 +263,7 @@ for image_set in image_sets:
             create_vissat_colmap_configuration_command = 'python create_colmap_configuration.py'
             create_vissat_colmap_configuration_command += ' --config_template_filename "{}" --config_filename "{}"'
             create_vissat_colmap_configuration_command += ' --ref_image_filename "{}" --sec_image_filename "{}"'
-            create_vissat_colmap_configuration_command += ' --gt_image_filename "{}" --work_dir "{}"'
+            create_vissat_colmap_configuration_command += ' --gt_image_filename "{}" --work_dir "{}"' # --overwrite_work_dir --overwrite_config'
 
             create_vissat_colmap_configuration_command = create_vissat_colmap_configuration_command.format(vissat_colmap_config_template_filename,
                                                                                        config_filename,

@@ -238,6 +238,7 @@ def test_ganet(opt, model):
 
 # https://stackoverflow.com/questions/14500183/in-python-can-i-call-the-main-of-an-imported-module
 def main(args):
+    print(args)
     # las dimensiones tienen que ser multiplo de 48 y tiene que dar la memoria de la GPU
     crop_val_laptop_AG = 48 * 14
 

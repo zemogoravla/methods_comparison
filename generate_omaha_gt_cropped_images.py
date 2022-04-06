@@ -20,6 +20,17 @@ cropped_image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DAT
 image_sets=[203, 247, 251, 287, 353]
 image_numbers = [1,9,15,20,32,41]
 
+# new set of all images
+cropped_image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DATA/cropped_all'
+image_sets=[203, 247, 251, 287, 353]
+image_numbers = [[t for t in range(1,44) if t not in []],
+                 [t for t in range(1,44) if t not in [7,10,12,42]],
+                 [t for t in range(1,44) if t not in [35]],
+                 [t for t in range(1,44) if t not in [13]],
+                 [t for t in range(1,44) if t not in [43]],
+
+                 ]
+
 
 
 # SET THE INDEX TO RUN---------------
@@ -36,7 +47,7 @@ gt_filename = os.path.join(gt_base_dir,'OMA_{:03d}_DSM.tif'.format(image_sets[i]
 _, gt_name = os.path.split(gt_filename)
 gt_name_no_extension,_ = os.path.splitext(gt_name)
 
-for n in image_numbers: #image_filename in image_filenames:
+for n in image_numbers[i]: #image_filename in image_filenames:
     image_filename = os.path.join(image_base_dir, 'OMA_{:03d}_{:03d}_PAN.tif'.format(image_set, n))
 
     rpc = rpcm.rpc_from_geotiff(image_filename)

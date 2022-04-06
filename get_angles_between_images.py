@@ -7,13 +7,18 @@ import s2p
 import rpcm
 from utils import *
 
+#
 result_angles_filename = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/JAX_DATA/angles.csv'
 image_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/JAX_DATA/GEOTIFF'
-image_wildcard = 'JAX_068_*_PAN.tif'
+image_wildcard = 'JAX_214_*_PAN.tif'
 
+#
 result_angles_filename = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DATA/angles.csv'
 image_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DATA/GEOTIFF'
 image_wildcard = 'OMA_203_*_PAN.tif'
+
+
+
 
 
 
@@ -21,7 +26,7 @@ image_filename_list = sorted( glob.glob(os.path.join(image_dir, image_wildcard))
 
 
 # all the possible image pairs
-all_pairs = get_all_possible_pairs_from_list(image_filename_list)
+all_pairs = get_all_possible_pairs_from_list(image_filename_list,order_matters=True)
 pair_list = all_pairs
 print('Pair list:', pair_list)
 

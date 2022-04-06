@@ -11,18 +11,19 @@ from utils import *
 
 aoi_relative_padding = 0.1
 
-base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMAHA_DATA/'
-image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMAHA_DATA/GEOTIFF'
-gt_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMAHA_DATA/gt'
-cropped_image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMAHA_DATA/cropped'
+base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DATA/'
+image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DATA/GEOTIFF'
+gt_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DATA/gt'
+cropped_image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/OMA_DATA/cropped'
 
 prefix = 'OMA'
+image_wildcard = 'OMA_203_*_PAN.tif'
 
 TMP_GDALINFO_JSON_FILENAME = '/home/agomez/tmp/tmp_gdalinfo.json'
 RESULTS_FILENAME = os.path.join(base_dir, 'metadata.csv')
 
 # tifs in the image_base_dir
-image_filenames = glob.glob(os.path.join(image_base_dir, '*.tif'))
+image_filenames = sorted(glob.glob(os.path.join(image_base_dir, image_wildcard)))
 
 results = []
 results.append(['image', 'image_set', 'image_number', 'year', 'month', 'day', 'hour', 'minutes', 'seconds'])

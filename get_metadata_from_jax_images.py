@@ -16,13 +16,16 @@ image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/JAX_DATA/GEOTIF
 gt_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/JAX_DATA/gt'
 cropped_image_base_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/JAX_DATA/cropped'
 
+
 prefix = 'JAX'
+image_wildcard = 'JAX_214_*_PAN.tif'
 
 TMP_GDALINFO_JSON_FILENAME = '/home/agomez/tmp/tmp_gdalinfo.json'
 RESULTS_FILENAME = os.path.join(base_dir, 'metadata.csv')
 
+
 # tifs in the image_base_dir
-image_filenames = sorted( glob.glob(os.path.join(image_base_dir, '*.tif')) )
+image_filenames = sorted( glob.glob(os.path.join(image_base_dir, image_wildcard)) )
 
 results = []
 results.append(['image', 'image_set', 'image_number', 'year', 'month', 'day', 'hour', 'minutes', 'seconds'])

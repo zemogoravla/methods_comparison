@@ -13,28 +13,28 @@ dsm_resolution = 0.3
 dsm_radius = 1
 
 s2_config_template_filename = '//s2p_config_template.json'
-vissat_colmap_config_template_filename = '//vissat_colmap_config_template.json'
+vissat_colmap_config_template_filename = 'vissat_colmap_config_template.json'
 
 s2p_ganet_main = '/home/agomez/ownCloud/Documents/doctorado/MultiViewStereo/python/methods_comparison/modified_s2p_for_ganet.py'
 vissat_colmap_main = '/home/agomez/Software/MultiStereo/COLMAP/VisSatSatelliteStereo/stereo_pipeline.py'
 
 
 
-crop_id = 'crop_01'
 
+crop_id = 'crop_01'
 image_set_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/IARPA_DATA/cropped/mvs3d_gt_{}'.format(crop_id)
 gt_filename = '/home/agomez/Documents/iie/satelite/DATA/IARPA_DATA/ground_truth/mvs3d_gt_{}.tif'.format(crop_id)
 image_list_filename = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/IARPA_DATA/cropped/mvs3d_gt_{}_image_list.txt'.format(crop_id)
 
 
 
-# JAX
-image_sets = [156, 165, 214, 251, 264] # JAX
-prefix = 'JAX'
+
 #OMA
 image_sets = [203, 247, 251, 287, 353]  #OMA
 prefix = 'OMA'
-
+# JAX
+image_sets = [156, 165, 214, 251, 264] # JAX
+prefix = 'JAX'
 
 # NEAR IN TIME
 image_set = image_sets[4]
@@ -48,6 +48,12 @@ image_set_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/{0}_DATA/cropped
 gt_filename = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/{0}_DATA/gt/{0}_{1:03d}_DSM.tif'.format(prefix, image_set)
 output_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/COMPARISON_FAR_IN_TIME{}'.format(prefix)
 
+
+# ALL IMAGES
+image_set = image_sets[4]
+image_set_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/{0}_DATA/cropped_all/{0}_{1:03d}'.format(prefix, image_set)
+gt_filename = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/{0}_DATA/gt/{0}_{1:03d}_DSM.tif'.format(prefix, image_set)
+output_dir = '/media/agomez/SeagateGoFlex750GB/SATELITE/DATA/COMPARISON_{}_ALL'.format(prefix)
 
 
 image_list_filename = os.path.join(image_set_dir, 'image_list.txt')
@@ -124,6 +130,11 @@ with open(os.path.join(vissat_colmap_output_image_set_dir, 'multi_dsm_result_fil
 
 
 exit(0)
+
+
+
+
+
 
 
 # --config_template_filename

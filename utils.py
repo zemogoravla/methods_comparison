@@ -134,6 +134,17 @@ def normalize_image(I, gamma=1/2.2, lower_percentile=2 , upper_percentile=98):
     J[J > 1] = 1
     return (J * 255).astype('uint8')
 
+# image normalization as done by VisSatSatelliteStereo (considering nans)
+def normalize_image_accepts_nans(I, gamma=1/2.2, lower_percentile=2 , upper_percentile=98):
+    J = I.copy().astype(np.double)
+    J = J**gamma
+    lower = np.nanpercentile(J, lower_percentile)
+    upper = np.nanpercentile(J, upper_percentile)
+    J = (J - lower) / (upper - lower)
+    J[J < 0] = 0
+    J[J > 1] = 1
+    return (J * 255).astype('uint8')
+
 
 # translate names between s2p and VisSatSatelliteStereo
 # See: VisSatSatelliteStereo/lib/parse_meta.py and VisSatSatelliteStereo/lib/rpc_model.py
@@ -183,3 +194,29 @@ def get_all_possible_pairs_from_list(L, order_matters=False):
     else:
         all_pairs = [list(comb) for comb in combinations(L,2)]
     return all_pairs
+
+
+if __name__ == '__main__':
+    from skimage.io import imread, imsave
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Open, normalize to 8bit range and save')
+    parser.add_argument('input_img_filename', type=str)
+    parser.add_argument('output_img_filename', type=str)
+    parser.add_argument('--top', type=int, default=0)
+    parser.add_argument('--left', type=int, default=0)
+    parser.add_argument('--width', type=int, default=-1)
+    parser.add_argument('--height', type=int, default=-1)
+
+    opt = parser.parse_args()
+
+    I = imread(opt.input_img_filename)
+    J = normalize_image_accepts_nans(I)
+
+    if opt.width == -1:
+        opt.width = I.shape[1]
+    if opt.height == -1:
+        opt.height = I.shape[0]
+
+    J = J[opt.top:opt.top+opt.height, opt.left:opt.left+opt.width]
+    imsave(opt.output_img_filename, J)

@@ -100,10 +100,10 @@ if __name__ == '__main__':
 
 
     #save aoi, images and metas to the work_dir
-    if not os.path.isdir(args.work_dir):
-        os.makedirs(args.work_dir)
-        os.makedirs(os.path.join(args.work_dir, 'images'))
-        os.makedirs(os.path.join(args.work_dir, 'metas'))
+    if not os.path.isdir(args.work_dir) or args.overwrite_work_dir:
+        os.makedirs(args.work_dir, exist_ok=True)
+        os.makedirs(os.path.join(args.work_dir, 'images'), exist_ok=True)
+        os.makedirs(os.path.join(args.work_dir, 'metas'), exist_ok=True)
 
     aoi_dict = {}
     aoi_dict['ul_easting'] = utm_bbx[0]
